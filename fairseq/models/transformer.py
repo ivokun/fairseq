@@ -433,12 +433,12 @@ class TransformerDecoder(FairseqIncrementalDecoder):
         # decoder layers
         for layer in self.layers:
             x, attn = layer(
-                x,
+                x.to('cuda:1'),
                 encoder_out['encoder_out'] if encoder_out is not None else None,
                 encoder_out['encoder_padding_mask'] if encoder_out is not None else None,
                 incremental_state,
                 self_attn_mask=self.buffered_future_mask(x) if incremental_state is None else None,
-            )
+            ).to('cuda:2')
             inner_states.append(x)
 
         if self.layer_norm:

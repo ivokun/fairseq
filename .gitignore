@@ -119,3 +119,5 @@ data-bin/
 
 # reranking
 examples/reranking/rerank_data
+
+examples/wikitext-id

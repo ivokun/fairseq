@@ -1,0 +1,15 @@
+python -u ./fairseq/custom/evaluation.py \
+    --batch-size-single-prediction 1536 --batch-size-completion 48 \
+    --data-prefix-length 50 --completion-length 100 \
+    --save-path ./public_checkpoints/ --ckpt all \
+    --model-path ./public_checkpoints/mle_baseline \
+    --data-dir ./data-bin/wikitext-103 \
+    --base-dir ./
+
+python -u ./fairseq/custom/evaluation.py \
+    --batch-size-single-prediction 256 --batch-size-completion 48 \
+    --data-prefix-length 50 --completion-length 100 \
+    --save-path ./checkpoints/ --ckpt all \
+    --model-path ./checkpoints/baseline_model-768 \
+    --data-dir ./data-bin/wikitext-103 \
+    --base-dir ./
