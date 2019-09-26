@@ -121,3 +121,4 @@ data-bin/
 examples/reranking/rerank_data
 examples/language_model/wikitext-103
 examples/wikitext-id
+checkpoint/
