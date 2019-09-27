@@ -41,7 +41,9 @@ class SequencePenaltyCriterionSimilarity(FairseqCriterion):
             mask = ngram_repeat_mask(pred_toks, self.sequence_ngram_n).type_as(lprobs)
         elif self.sequence_candidate_type == 'random':
             mask = torch.bernoulli(torch.zeros_like(pred_toks, dtype=torch.float).fill_(self.mask_p))
-
+        # extract learned embedding
+        print(batch.shape)
+        print(model.decoder.embed_tokens(batch).shape)
         pred_lprobs = lprobs.view(-1, lprobs.size(2)).gather(1, pred_toks.view(-1, 1))
         one_minus_probs = torch.clamp((1.0 - pred_lprobs.exp()), min=1e-20).view(pred_toks.size(0), pred_toks.size(1))
         loss = -torch.log(one_minus_probs)*mask
